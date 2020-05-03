@@ -1,0 +1,85 @@
+version: '3.3'
+
+services:
+    rabbitmq:
+        image: "rabbitmq:3-management"
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+        volumes:
+            - 'rabbitmq_data:/data'
+        networks: 
+            - backend
+    webapi:
+        build: ./backend
+        command: flask run -h 0.0.0.0 -p 5000
+        volumes:
+            - ./backend/:/usr/src/app/
+        ports:
+            - 5000:5000
+        env_file:
+            - ./.env
+        depends_on: 
+            - rabbitmq
+            - mongodb
+        links: 
+            - mongodb
+        networks: 
+            - backend
+
+    ldaapi:
+        build: ./LDA
+        restart: on-failure
+        command: python app.py
+        volumes:
+            - ./LDA/:/usr/src/app/
+        env_file:
+            - ./.env
+        depends_on: 
+            - rabbitmq
+            - mongodb
+        links: 
+            - mongodb
+        networks: 
+            - backend
+
+    mqbroker:
+        build: ./mq
+        restart: on-failure
+        command: node app.js
+        volumes:
+            - ./mq/:/usr/src/app/
+        ports: 
+            - 3000:3000
+        env_file:
+            - ./.env
+        depends_on: 
+            - rabbitmq
+            - mongodb
+        links: 
+            - mongodb
+        networks: 
+            - backend
+
+    mongodb:
+        command: mongod --port 27017 --bind_ip 0.0.0.0
+        build: ./mongodb
+        env_file: .env.db
+        ports: 
+            - 27017:27017
+        expose: 
+            - 27017
+        volumes:
+            - mongodbdata:/data/db
+        networks: 
+            - backend
+
+volumes:
+    rabbitmq_data:
+        driver: local
+    mongodbdata:
+        driver: local
+
+networks: 
+    backend:
+        driver: bridge

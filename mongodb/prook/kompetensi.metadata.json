@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"prook.kompetensi"},{"v":{"$numberInt":"2"},"unique":true,"key":{"kode_kompetensi":{"$numberInt":"1"}},"name":"kode_kompetensi_1","ns":"prook.kompetensi","background":false,"sparse":false}],"uuid":"00a5bc5636cd4d85be3fc6aa82dfd1fb"}

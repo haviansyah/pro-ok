@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"prook.global_var"}],"uuid":"73e9211400f340309554f8f0a3f92799"}
