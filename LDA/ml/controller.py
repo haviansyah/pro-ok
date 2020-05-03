@@ -42,6 +42,7 @@ def preprocessing(data):
         pengetahuan = kompetensi["pengetahuan"]
         text = keterampilan + " " + pengetahuan
         token = Preprocessing().preprocess(text)
+        print(token)
         update_kompetensi(id, token)
 
     if collection == "matakuliah":
