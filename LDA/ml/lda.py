@@ -20,7 +20,7 @@ class LDA():
         corpus = [dictionary.doc2bow(doc) for doc in self.df]
         # low alpha means each document is only represented by a small number of topics, and vice versa
         # low eta means each topic is only represented by a small number of words, and vice versa
-        lda = LdaModel(corpus=corpus, num_topics=num_topics, id2word=dictionary, passes=2,random_state=2)
+        lda = LdaModel(corpus=corpus, num_topics=num_topics, id2word=dictionary, passes=2)
         return dictionary,corpus,lda
 
     def train_tfidf(self,num_topics=12):
