@@ -24,4 +24,5 @@ def initialize_routes(api):
     api.add_resource(LdaTrainAPI,'/api/lda/train')
 
 
-    api.add_resource(LdaAPI,'/api/test')
+    api.add_resource(LdaAPI,'/api/dashboard')
+    api.add_resource(LdaStatusApi,'/api/lda/status')

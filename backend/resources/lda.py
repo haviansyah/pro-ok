@@ -1,6 +1,6 @@
 from flask import Response, request
 from flask_restful import Resource, reqparse
-from database.models import Okupasi, Kompetensi, Jurusan
+from database.models import Okupasi, Kompetensi, Jurusan, Matakuliah
 from ml.lda import LDA
 from mq.mq import sendReTrain, sendTrain
 import json.encoder 
@@ -8,9 +8,23 @@ from resources.errors import InternalServerError, SchemaValidationError, IdAlrea
 from resources.global_var import get_current_state,edit_current_state
 
 
-class LdaAPI(Resource):
+class LdaStatusApi(Resource):
     def get(self):
         return get_current_state()["status"],200
+
+class LdaAPI(Resource):
+    def get(self):
+        jmlOkupasi = Okupasi.objects.count()
+        jmlKompetensi = Kompetensi.objects.count()
+        jmlJurusan = Jurusan.objects.count()
+        jmlMatakuliah = Matakuliah.objects.count()
+        result = {
+            "jumlah_okupasi" : jmlOkupasi,
+            "jumlah_kompetensi" : jmlKompetensi,
+            "jumlah_jurusan" : jmlJurusan,
+            "jumlah_matakuliah" : jmlMatakuliah,
+        }
+        return result, 200
 
 class LdaTrainAPI(Resource):
     def get(self):
