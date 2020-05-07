@@ -58,7 +58,9 @@ class LdaOneAPI(Resource):
             
             outputs = []
             for h in hasil:
-                output = {h["nama_kompetensi"] : bool(len(h["kecocokan"]) )}
+                output = {
+                    "nama_kompetensi" :h["nama_kompetensi"], 
+                    "cocok" : bool(len(h["kecocokan"]) )}
                 outputs.append(output)
             total_kompetensi = len(outputs);
             status = "success"
