@@ -45,29 +45,30 @@ class LdaTrainAPI(Resource):
 class LdaOneAPI(Resource):
 
     def get(self):
-        # try:
-        parser = reqparse.RequestParser()
-        parser.add_argument('kode_jurusan', type=str)
-        parser.add_argument('kode_okupasi', type=str)
-        parsing = parser.parse_args()
-        
-        kode_jurusan = parsing["kode_jurusan"]
-        kode_okupasi = parsing["kode_okupasi"]
+        try:
+            parser = reqparse.RequestParser()
+            parser.add_argument('kode_jurusan', type=str)
+            parser.add_argument('kode_okupasi', type=str)
+            parsing = parser.parse_args()
+            
+            kode_jurusan = parsing["kode_jurusan"]
+            kode_okupasi = parsing["kode_okupasi"]
 
-        hasil, total_cocok = LDA().getSimilarity(kode_jurusan,kode_okupasi)
+            hasil, total_cocok = LDA().getSimilarity(kode_jurusan,kode_okupasi)
 
-        outputs = []
-        for h in hasil:
-            output = {h["nama_kompetensi"] : bool(len(h["kecocokan"]) )}
-            outputs.append(output)
-        status = "success"
-        # except Exception as e:
-        #     print(e)
-        #     status = "error"
+            outputs = []
+            for h in hasil:
+                output = {h["nama_kompetensi"] : bool(len(h["kecocokan"]) )}
+                outputs.append(output)
+            status = "success"
+        except Exception as e:
+            print(e)
+            status = "error"
         result = {
             "status" : status,
             "results" : None if status == "error" else {
                 "total_cocok" : total_cocok,
+                "total_kompetensi" : len(outputs),
                 "result" : outputs}
         }
         
