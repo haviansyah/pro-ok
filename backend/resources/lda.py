@@ -68,7 +68,7 @@ class LdaOneAPI(Resource):
         result = {
             "status" : status,
             "results" : None if status == "error" else {
-                "kecocokan" : total_cocok / total_kompetensi,
+                "kecocokan" : 0 if total_kompetensi == 0 else total_cocok / total_kompetensi,
                 "total_cocok" : total_cocok,
                 "total_kompetensi" : len(outputs),
                 "result" : outputs}
