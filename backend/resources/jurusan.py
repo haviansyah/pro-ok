@@ -12,8 +12,9 @@ from resources.errors import InternalServerError, SchemaValidationError, IdAlrea
 
 class JurusanApi(Resource):
     def get(self):
+        columns = [k for k,v in Jurusan._fields.iteritems()]
         jurusans = Jurusan.objects().to_json()
-        return Response(jurusans,mimetype="application/json", status=200)
+        return Response(columns,mimetype="application/json", status=200)
 
     def post(self):
         try:
