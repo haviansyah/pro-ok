@@ -15,7 +15,7 @@ class JurusanApi(Resource):
     def get(self):
         columns = [k for k,v in Jurusan._fields.items()]
         data = [
-            [dat[col] for col in columns if not isinstance(dat[col], list)] for dat in Jurusan.objects()
+            [ [lidat["id"] for lidat in dat[col]] if isinstance(dat[col], list) else dat[col] for col in columns ] for dat in Jurusan.objects()
         ]
         jurusans = Jurusan.objects().to_json()
         return Response(JSONEncoder().encode(data),mimetype="application/json", status=200)
