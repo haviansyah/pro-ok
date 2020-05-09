@@ -6,7 +6,7 @@ from bson import json_util
 from mq.mq import sendReTrain, sendTrain
 from mongoengine.errors import FieldDoesNotExist, \
 NotUniqueError, DoesNotExist, ValidationError, InvalidQueryError
-
+from .helper import JSONEncoder
 from resources.errors import InternalServerError, SchemaValidationError, IdAlreadyExistsError, UpdatingError, DeletingError, NotExistsError, UnauthorizedError, errors
 
 # Jurusan Controller
@@ -18,7 +18,7 @@ class JurusanApi(Resource):
             [dat[col] for col in columns if not isinstance(dat[col], list)] for dat in Jurusan.objects()
         ]
         jurusans = Jurusan.objects().to_json()
-        return Response(json.dumps(data),mimetype="application/json", status=200)
+        return Response(JSONEncoder().encode(data),mimetype="application/json", status=200)
 
     def post(self):
         try:
