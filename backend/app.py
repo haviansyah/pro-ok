@@ -10,7 +10,7 @@ import os
 
 app = Flask(__name__)
 app.config['MONGODB_SETTINGS'] = {
-    'host': "mongodb://prook:m0Zs7d89nMmGqpwfV7hK9BdvGY7@127.0.0.1/prook?authSource=admin&gssapiServiceName=mongodb"
+    "host": "mongodb://prook:m0Zs7d89nMmGqpwfV7hK9BdvGY7@127.0.0.1/prook?authSource=admin&gssapiServiceName=mongodb"
 }
 app.config['JWT_SECRET_KEY'] = os.environ['JWT_SECRET_KEY'] 
 
