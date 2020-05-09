@@ -5,7 +5,7 @@ class Database():
     
     def __init__(self,dbname):
         self.dbname = dbname
-        self.client = MongoClient(os.environ['MONGODB_HOSTNAME'], 27017)
+        self.client = MongoClient(os.environ['MONGODB_HOSTNAME'],username=os.environ['MONGODB_USERNAME'],password=os.environ['MONGODB_PASSWORD'],authSource="admin")
 
     def mongo(self):
         return self.client[self.dbname]
