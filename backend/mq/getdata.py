@@ -5,7 +5,7 @@ class Database():
     
     def __init__(self,dbname):
         self.dbname = dbname
-        self.client = MongoClient("mongodb://prook:m0Zs7d89nMmGqpwfV7hK9BdvGY7@127.0.0.1/prook")
+        self.client = MongoClient("mongodb://prook:m0Zs7d89nMmGqpwfV7hK9BdvGY7@127.0.0.1/prook?authSource=admin&gssapiServiceName=mongodb")
 
     def mongo(self):
         return self.client[self.dbname]
