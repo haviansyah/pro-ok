@@ -9,12 +9,15 @@ from flask_cors import CORS
 import os
 
 app = Flask(__name__)
-app.config['MONGODB_DB'] = os.environ['MONGODB_DATABASE']
-app.config['MONGODB_HOST'] = os.environ['MONGODB_HOSTNAME'] 
-app.config['MONGODB_USERNAME'] = os.environ['MONGODB_USERNAME'] 
-app.config['MONGODB_PASSWORD'] = os.environ['MONGODB_PASSWORD'] 
+# app.config['MONGODB_DB'] = os.environ['MONGODB_DATABASE']
+# app.config['MONGODB_HOST'] = os.environ['MONGODB_HOSTNAME'] 
+# app.config['MONGODB_USERNAME'] = os.environ['MONGODB_USERNAME'] 
+# app.config['MONGODB_PASSWORD'] = os.environ['MONGODB_PASSWORD'] 
 app.config['MONGODB_SETTINGS'] = {
-    "host": "mongodb://prook:m0Zs7d89nMmGqpwfV7hK9BdvGY7@127.0.0.1:27017/prook?authSource=admin&gssapiServiceName=mongodb"
+    'db' : 'prook',
+    'username' : 'prook',
+    'password' : 'm0Zs7d89nMmGqpwfV7hK9BdvGY7',
+    'host': "mongodb://127.0.0.1:27017/prook?authSource=admin"
 }
 app.config['MONGODB_PORT'] = 27017
 app.config['JWT_SECRET_KEY'] = os.environ['JWT_SECRET_KEY'] 
