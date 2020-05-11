@@ -13,8 +13,22 @@ from resources.errors import InternalServerError, SchemaValidationError, IdAlrea
 
 class JurusanApi(Resource):
     def get(self):
-        jurusan = Jurusan.objects().to_json()
-        return Response(jurusan,mimetype="application/json", status=200)
+        columns = ["id","kode_jurusan","nama_jurusan","jumlah_matakuliah"]
+        jurusans = Jurusan.objects()
+        jurusan_list = []
+        for jurusan in jurusans :
+            new_jurusan = [
+                jurusan["id"],
+                jurusan["kode_jurusan"],
+                jurusan["nama_jurusan"],
+                len(jurusan["matakuliah"])
+            ]
+            jurusan_list.append(new_jurusan)
+        results ={
+            "columns" : columns,
+            "data" : jurusan_list
+        }
+        return Response(JSONEncoder.encode(results),mimetype="application/json", status=200)
 
     def post(self):
         try:
