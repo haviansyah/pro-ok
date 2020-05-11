@@ -13,15 +13,8 @@ from resources.errors import InternalServerError, SchemaValidationError, IdAlrea
 
 class JurusanApi(Resource):
     def get(self):
-        columns = [k for k,v in Jurusan._fields.items()]
-        data = [
-            [ [lidat["id"] for lidat in dat[col]] if isinstance(dat[col], list) else dat[col] for col in columns ] for dat in Jurusan.objects()
-        ]
-        result = {
-            "columns" : columns,
-            "data" : data
-        }
-        return Response(JSONEncoder().encode(result),mimetype="application/json", status=200)
+        jurusan = Jurusan.objects().to_json()
+        return Response(jurusan,mimetype="application/json", status=200)
 
     def post(self):
         try:
