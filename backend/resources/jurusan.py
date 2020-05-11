@@ -91,7 +91,7 @@ class JurusanOneApi(Resource):
 class MatakuliahApi(Resource):
     def get(self):
         columns = ["id","Kode Matakuliah","Nama Matakuliah","Sikap","Keterampilan","Pengetahuan"]
-        matakuliahs = Matakuliah.objects().to_json()
+        matakuliahs = Matakuliah.objects()
         matakuliah_list = []
         for matakuliah in matakuliahs:
             new_matakuliah = [
@@ -107,7 +107,7 @@ class MatakuliahApi(Resource):
             "columns" : columns,
             "data" : matakuliah_list
         }
-        return Response(JSONEncoder().encode(result),mimetype="application/json", status=200)
+        return Response(JSONEncoder().encode(result ),mimetype="application/json", status=200)
     
     def post(self):
         try:
