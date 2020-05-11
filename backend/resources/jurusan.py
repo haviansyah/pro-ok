@@ -28,7 +28,7 @@ class JurusanApi(Resource):
             "columns" : columns,
             "data" : jurusan_list
         }
-        return Response(JSONEncoder.encode(results),mimetype="application/json", status=200)
+        return Response(JSONEncoder().encode(results),mimetype="application/json", status=200)
 
     def post(self):
         try:
