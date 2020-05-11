@@ -91,7 +91,7 @@ class OkupasiOneApi(Resource):
 class KompetensiApi(Resource):
     def get(self):
         columns = ["id","Kode Kompetensi","Nama Kompetensi","Sikap","Keterampilan","Pengetahuan"]
-        kompetensis = Kompetensi.objects().to_json()
+        kompetensis = Kompetensi.objects()
         kompetensi_list = []
         for kompetensi in kompetensis:
             new_kompetensi = [
