@@ -5,7 +5,7 @@ from flask_restful import Resource
 from mongoengine.errors import FieldDoesNotExist, \
 NotUniqueError, DoesNotExist, ValidationError, InvalidQueryError
 from resources.errors import InternalServerError, SchemaValidationError, IdAlreadyExistsError, UpdatingError, DeletingError, NotExistsError, UnauthorizedError, errors
-
+from resources.helper import JSONEncoder
 from mq.mq import sendReTrain, sendTrain
 
 
@@ -13,8 +13,22 @@ from mq.mq import sendReTrain, sendTrain
 
 class OkupasiApi(Resource):
     def get(self):
-        okupasis = Okupasi.objects().to_json()
-        return Response(okupasis,mimetype="application/json", status=200)
+        columns = ["id","Kode Okupasi","Nama Okupasi","Jumlah Kompetensi"]
+        okupasis = Okupasi.objects()
+        okupasi_list = []
+        for okupasi in okupasis:
+            new_okupasi = [
+                okupasi["id"],
+                okupasi["kode_okupasi"],
+                okupasi["nama_okupasi"],
+                len(okupasi["kompetensi_list"])
+            ]
+            okupasi_list.append(new_okupasi)
+        result = {
+            "columns" : columns,
+            "data" : okupasi_list
+        }
+        return Response(JSONEncoder().encode(result),mimetype="application/json", status=200)
 
     def post(self):
         try:
@@ -76,8 +90,24 @@ class OkupasiOneApi(Resource):
 
 class KompetensiApi(Resource):
     def get(self):
-        kompetensi = Kompetensi.objects().to_json()
-        return Response(kompetensi,mimetype="application/json", status=200)
+        columns = ["id","Kode Kompetensi","Nama Kompetensi","Sikap","Keterampilan","Pengetahuan"]
+        kompetensis = Kompetensi.objects().to_json()
+        kompetensi_list = []
+        for kompetensi in kompetensis:
+            new_kompetensi = [
+                kompetensi["id"],
+                kompetensi["kode_kompetensi"],
+                kompetensi["nama_kompetensi"],
+                kompetensi['sikap'],
+                kompetensi['keterampilan'],
+                kompetensi['pengetahuan']
+            ]
+            kompetensi_list.append(new_kompetensi)
+        result = {
+            'columns' : columns,
+            'data' : kompetensi_list
+        }
+        return Response(JSONEncoder().encode(result),mimetype="application/json", status=200)
     
     def post(self):
         try:
