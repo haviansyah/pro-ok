@@ -27,7 +27,7 @@ class Matakuliah(db.Document):
 
 
 class Jurusan(db.Document):
-    kode_jurusan = db.StringField(requied=True)
+    kode_jurusan = db.StringField(requied=True,unique=True)
     nama_jurusan = db.StringField(required=True)
     matakuliah_list = db.ListField(db.ReferenceField(Matakuliah))
     meta = {'strict': False}
@@ -51,7 +51,7 @@ class Kompetensi(db.Document):
 
 
 class Okupasi(db.Document):
-    kode_okupasi = db.StringField(required=True)
+    kode_okupasi = db.StringField(required=True,unique=True)
     nama_okupasi = db.StringField(required=True)
     kompetensi_list = db.ListField(db.ReferenceField(Kompetensi))
     @property
