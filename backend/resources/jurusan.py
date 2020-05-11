@@ -21,7 +21,7 @@ class JurusanApi(Resource):
                 jurusan["id"],
                 jurusan["kode_jurusan"],
                 jurusan["nama_jurusan"],
-                len(jurusan["matakuliah"])
+                len(jurusan["matakuliah_list"])
             ]
             jurusan_list.append(new_jurusan)
         results ={
