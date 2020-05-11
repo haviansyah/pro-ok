@@ -13,7 +13,7 @@ from resources.errors import InternalServerError, SchemaValidationError, IdAlrea
 
 class JurusanApi(Resource):
     def get(self):
-        columns = ["id","kode_jurusan","nama_jurusan","jumlah_matakuliah"]
+        columns = ["id","Kode Jurusan","Nama Jurusan","Jumlah Matakuliah"]
         jurusans = Jurusan.objects()
         jurusan_list = []
         for jurusan in jurusans :
@@ -29,6 +29,7 @@ class JurusanApi(Resource):
             "data" : jurusan_list
         }
         return Response(JSONEncoder().encode(results),mimetype="application/json", status=200)
+
 
     def post(self):
         try:
@@ -89,8 +90,24 @@ class JurusanOneApi(Resource):
 # Mata Kuliah Controller
 class MatakuliahApi(Resource):
     def get(self):
-        matakuliah = Matakuliah.objects().to_json()
-        return Response(matakuliah,mimetype="application/json", status=200)
+        columns = ["id","Kode Matakuliah","Nama Matakuliah","Sikap","Keterampilan","Pengetahuan"]
+        matakuliahs = Matakuliah.objects().to_json()
+        matakuliah_list = []
+        for matakuliah in matakuliahs:
+            new_matakuliah = [
+                matakuliah["id"],
+                matakuliah["kode_matakuliah"],
+                matakuliah["nama_matakuliah"],
+                matakuliah["sikap"],
+                matakuliah["keterampilan"],
+                matakuliah["pengetahuan"]
+            ]
+            matakuliah_list.append(new_matakuliah)
+        result = {
+            "columns" : columns,
+            "data" : matakuliah_list
+        }
+        return Response(JSONEncoder().encode(result),mimetype="application/json", status=200)
     
     def post(self):
         try:
