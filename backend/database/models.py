@@ -24,8 +24,6 @@ class Matakuliah(db.Document):
     token = db.ListField(db.StringField())
     meta = {'strict': False}
 
-
-
 class Jurusan(db.Document):
     kode_jurusan = db.StringField(requied=True,unique=True)
     nama_jurusan = db.StringField(required=True)
@@ -59,8 +57,7 @@ class Okupasi(db.Document):
         return [ Kompetensi.objects().get(id=komp.id).to_mongo() for komp in self.kompetensi_list  ]
     meta = {'strict': False}
     
-
-
+    
 class GlobalVar(db.Document):
     constant = db.DynamicField()
     current_state = db.DynamicField()

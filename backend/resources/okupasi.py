@@ -148,7 +148,7 @@ class KompetensiOneApi(Resource):
             kompet = Kompetensi.objects.get(kode_kompetensi=id)
             kompet.update(**body)
             sendTrain({
-                "collection" : "matakuliah",
+                "collection" : "kompetensi",
                 "id" : str(kompet.id)
             })
             return {'status': "success"}, 200
