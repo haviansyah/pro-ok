@@ -6,7 +6,7 @@ from mq.mq import sendReTrain, sendTrain
 import json.encoder 
 from resources.errors import InternalServerError, SchemaValidationError, IdAlreadyExistsError, UpdatingError, DeletingError, NotExistsError, UnauthorizedError
 from resources.global_var import get_current_state,edit_current_state
-
+import sys
 
 class LdaStatusApi(Resource):
     def get(self):
@@ -60,12 +60,13 @@ class LdaOneAPI(Resource):
             for h in hasil:
                 output = {
                     "nama_kompetensi" :h["nama_kompetensi"], 
-                    "cocok" : bool(len(h["kecocokan"]) )}
+                    "cocok" : bool(len(h["kecocokan"]))}
+		    #"cocok" : h["kecocokan"]}
                 outputs.append(output)
             total_kompetensi = len(outputs);
             status = "success"
         except Exception as e:
-            print(e)
+            print(e,file=sys.stderr)
             status = "error"
         result = {
             "status" : status,
