@@ -21,6 +21,7 @@ def initialize_routes(api):
     api.add_resource(KompetensiOneApi,'/api/kompetensi/<id>')
 
     api.add_resource(LdaOneAPI,'/api/lda')
+    api.add_resource(LdaOneApiDetail,'/api/lda-detail')
     api.add_resource(LdaTrainAPI,'/api/lda/train')
 
 

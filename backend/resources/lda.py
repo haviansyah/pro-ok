@@ -80,3 +80,41 @@ class LdaOneAPI(Resource):
 
         return result,200
 
+class LdaOneApiDetail(Resource):
+    
+    def get(self):
+        try:
+            parser = reqparse.RequestParser()
+            parser.add_argument('kode_jurusan', type=str)
+            parser.add_argument('kode_okupasi', type=str)
+            parsing = parser.parse_args()
+            
+            kode_jurusan = parsing["kode_jurusan"]
+            kode_okupasi = parsing["kode_okupasi"]
+
+            hasil, total_cocok = LDA().getSimilarity(kode_jurusan,kode_okupasi)
+            
+            outputs = []
+            for h in hasil:
+                output = {
+                    "nama_kompetensi" :h["nama_kompetensi"], 
+                    # "cocok" : bool(len(h["kecocokan"]))}
+		            "cocok" : h["kecocokan"]}
+                outputs.append(output)
+            total_kompetensi = len(outputs);
+            status = "success"
+        except Exception as e:
+            print(e,file=sys.stderr)
+            status = "error"
+        result = {
+            "status" : status,
+            "results" : None if status == "error" else {
+                "kecocokan" : 0 if total_kompetensi == 0 else total_cocok / total_kompetensi,
+                "total_cocok" : total_cocok,
+                "total_kompetensi" : len(outputs),
+                "result" : outputs}
+        }
+        
+
+        return result,200
+
