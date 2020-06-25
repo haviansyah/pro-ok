@@ -43,6 +43,7 @@ class MQ():
 
 
 def sendTrain(data):
+    edit_current_state()
     mq = MQ()
     data = {
         "type" : "TRAIN",
