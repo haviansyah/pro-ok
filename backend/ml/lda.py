@@ -12,10 +12,6 @@ class LDA():
         model = LdaMulticore.load("../LDA/models/"+lda_file)
         return dictionary, model
 
-    def cossine(self, p, q):
-        sims = matutils.cossim(p, q)
-        return sims
-
     def getKompetensiOkupasi(self, kode_okupasi):
         okupasi     = Okupasi.objects().get(kode_okupasi = kode_okupasi)
         kompetensi  = okupasi.kompetensi
@@ -25,6 +21,10 @@ class LDA():
          jurusan    = Jurusan.objects().get(kode_jurusan = kode_jurusan)
          matkul     = jurusan.matakuliah
          return matkul
+
+    def cossine(self, p, q):
+        sims = matutils.cossim(p, q)
+        return sims
 
     def getSimilarity(self, kode_jurusan, kode_okupasi, all = False):
         dictionary, lda = self.getModel()
