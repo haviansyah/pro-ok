@@ -37,10 +37,9 @@ class LDA():
         for kompetensi in kompetensis :
             nama_kompetensi = kompetensi["nama_kompetensi"]
             cocok = []
+            vec_bow_k = dictionary.doc2bow(kompetensi["token"])
+            vec_lda_k = lda[vec_bow_k]
             for matakuliah in matakuliahs :
-                vec_bow_k = dictionary.doc2bow(kompetensi["token"])
-                vec_lda_k = lda[vec_bow_k]
-
                 vec_bow_m = dictionary.doc2bow(matakuliah["token"])
                 vec_lda_m = lda[vec_bow_m]            
                 sim = self.cossine(vec_lda_k,vec_lda_m)
