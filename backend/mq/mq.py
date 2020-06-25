@@ -5,6 +5,7 @@ import threading
 from mq.constant import *
 import datetime
 import os
+from resources.global_var import get_current_state,edit_current_state
 # from flask import current_app as app
 
 queue = {}
@@ -55,6 +56,7 @@ def sendTrain(data):
         print(e)    
 
 def sendReTrain():
+    edit_current_state()
     mq = MQ()
     data = {
         "type" : "RETRAIN"
