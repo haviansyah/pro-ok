@@ -14,7 +14,7 @@ def trainFromDB():
     df_kp = pd.DataFrame(kp)
     df_all = df_kp.append(df_mk,ignore_index=True, sort=False)
     df_all = df_all.dropna(subset=["token"])
-    dictionary, corpus, lda, tfidf = LDA(df_all["token"]).train_tfidf(num_topics=80)
+    dictionary, corpus, lda, tfidf = LDA(df_all["token"]).train_tfidf(num_topics=85)
     # timestring = datetime.today().strftime('%Y-%m-%d-%H:%M:%S');
     timestring = "_trained"
     
