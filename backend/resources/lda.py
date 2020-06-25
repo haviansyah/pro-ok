@@ -92,7 +92,7 @@ class LdaOneApiDetail(Resource):
             kode_jurusan = parsing["kode_jurusan"]
             kode_okupasi = parsing["kode_okupasi"]
 
-            hasil, total_cocok = LDA().getSimilarity(kode_jurusan,kode_okupasi)
+            hasil, total_cocok = LDA().getSimilarity(kode_jurusan,kode_okupasi,all=True)
             
             outputs = []
             for h in hasil:

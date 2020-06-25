@@ -26,7 +26,7 @@ class LDA():
          matkul     = jurusan.matakuliah
          return matkul
 
-    def getSimilarity(self, kode_jurusan, kode_okupasi):
+    def getSimilarity(self, kode_jurusan, kode_okupasi, all = False):
         dictionary, lda = self.getModel()
         
         matakuliahs = self.getMatkulJurusan(kode_jurusan)
@@ -44,7 +44,11 @@ class LDA():
                 vec_bow_m = dictionary.doc2bow(matakuliah["token"])
                 vec_lda_m = lda[vec_bow_m]            
                 sim = self.cossine(vec_lda_k,vec_lda_m)
-                if sim > 0.6 :
+                if not all :
+                    if sim > 0.6 :
+                        nama_m = matakuliah["nama_matakuliah"]
+                        cocok.append([nama_m,sim])
+                else :
                     nama_m = matakuliah["nama_matakuliah"]
                     cocok.append([nama_m,sim])
             hasil.append({
