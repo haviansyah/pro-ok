@@ -86,15 +86,15 @@ class OkupasiOneApi(Resource):
             return error["message"],error["status"]
 
     def post(self,id):
-        # try :
+        try :
             okupasis = Okupasi.objects().get(kode_okupasi=id).kompetensi
-            return Response(JSONEncoder.encode(okupasis),mimetype="application/json", status=200)
-        # except DoesNotExist:
-        #     error = errors["NotExistsError"]
-        #     return error["message"],error["status"]
-        # except Exception :
-        #     error = errors["InternalServerError"]
-        #     return error["message"],error["status"]
+            return Response(JSONEncoder().encode(okupasis),mimetype="application/json", status=200)
+        except DoesNotExist:
+            error = errors["NotExistsError"]
+            return error["message"],error["status"]
+        except Exception :
+            error = errors["InternalServerError"]
+            return error["message"],error["status"]
 
 
 # Mata Kuliah Controller
