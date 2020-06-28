@@ -64,6 +64,17 @@ class JurusanOneApi(Resource):
             error = errors["InternalServerError"]
             return error["message"],error["status"]
     
+    def post(self,id):
+        try :
+            jurusan_matkul = Jurusan.objects().get(kode_jurusan = id).matakuliah
+            return Response(json.dumps(jurusan_matkul),mimetype="application/json", status=200)
+        except DoesNotExist:
+            error = errors["NotExistsError"]
+            return error["message"],error["status"]
+        except Exception :
+            error = errors["InternalServerError"]
+            return error["message"],error["status"]
+
     def delete(self,id):
         try:
             jurusan = Jurusan.objects.get(kode_jurusan=id).delete()
