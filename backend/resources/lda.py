@@ -6,6 +6,7 @@ from mq.mq import sendReTrain, sendTrain
 import json.encoder 
 from resources.errors import InternalServerError, SchemaValidationError, IdAlreadyExistsError, UpdatingError, DeletingError, NotExistsError, UnauthorizedError
 from resources.global_var import get_current_state,edit_current_state
+
 import sys
 
 class LdaStatusApi(Resource):

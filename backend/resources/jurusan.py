@@ -67,7 +67,7 @@ class JurusanOneApi(Resource):
     def post(self,id):
         # try :
             jurusan_matkul = Jurusan.objects().get(kode_jurusan = id).matakuliah
-            return Response(json.dumps(jurusan_matkul),mimetype="application/json", status=200)
+            return Response(JSONEncoder().encode(jurusan_matkul),mimetype="application/json", status=200)
         # except DoesNotExist:
         #     error = errors["NotExistsError"]
         #     return error["message"],error["status"]
