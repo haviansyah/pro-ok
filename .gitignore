@@ -3,3 +3,4 @@ node_modules/
 frontend
 LDA/models/
 *.pyc 
+.DS_Store
