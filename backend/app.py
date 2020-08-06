@@ -17,7 +17,7 @@ app.config['MONGODB_SETTINGS'] = {
     'db' : 'prook',
     'username' : 'prook',
     'password' : 'm0Zs7d89nMmGqpwfV7hK9BdvGY7',
-    'host': "mongodb://127.0.0.1:27017/prook?authSource=admin"
+    'host': "mongodb://mongodb:27017/prook?authSource=admin"
 }
 app.config['MONGODB_PORT'] = 27017
 app.config['JWT_SECRET_KEY'] = os.environ['JWT_SECRET_KEY'] 
