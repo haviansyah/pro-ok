@@ -14,3 +14,5 @@ RUN pip install -r requirements.txt
 
 # copy project
 COPY . /usr/src/app/
+
+RUN mkdir /usr/src/app/models
