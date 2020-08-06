@@ -15,6 +15,7 @@ services:
         command: flask run -h 0.0.0.0 -p 5000
         volumes:
             - ./backend/:/usr/src/app/
+            - models_data:/usr/src/app/models
         ports:
             - 5015:5000
         env_file:
@@ -33,6 +34,7 @@ services:
         command: python app.py
         volumes:
             - ./LDA/:/usr/src/app/
+            - models_data:/usr/src/app/models
         env_file:
             - ./.env
         depends_on: 
@@ -78,6 +80,8 @@ volumes:
     rabbitmq_data:
         driver: local
     mongodbdata:
+        driver: local
+    models_data:
         driver: local
 
 networks: 

@@ -8,8 +8,8 @@ class LDA():
     def getModel(self):
         dictionary_file = get_current_state()["dictionary"]
         lda_file = get_current_state()["lda"]
-        dictionary = corpora.Dictionary.load("../LDA/models/"+dictionary_file)
-        model = LdaMulticore.load("../LDA/models/"+lda_file)
+        dictionary = corpora.Dictionary.load("models/"+dictionary_file)
+        model = LdaMulticore.load("models/"+lda_file)
         return dictionary, model
 
     def getKompetensiOkupasi(self, kode_okupasi):
