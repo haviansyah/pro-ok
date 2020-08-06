@@ -4,7 +4,7 @@ import os
 class MQ():
      
     def __init__(self):
-        self.connection = pika.BlockingConnection(pika.ConnectionParameters('localhost')) # Buat Koneksi Ke RMQ
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters('rabbitmq')) # Buat Koneksi Ke RMQ
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue='web_status') #Declaring Queue dan buat queue durable
         self.channel.queue_declare(queue='lda_queue',durable=True) #Declaring Queue dan buat queue durable
