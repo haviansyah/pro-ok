@@ -17,7 +17,7 @@ services:
             - ./backend/:/usr/src/app/
             - models_data:/usr/src/app/models
         ports:
-            - 5015:5000
+            - 5069:5000
         env_file:
             - ./.env
         depends_on: 
