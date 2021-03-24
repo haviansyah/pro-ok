@@ -32,7 +32,7 @@ python-dateutil==2.8.1
 pytz==2019.3
 regex==2020.4.4
 requests==2.23.0
-rsa==4.0
+rsa==4.1
 s3transfer==0.3.3
 Sastrawi==1.0.1
 scikit-learn==0.22.2.post1
